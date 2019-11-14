@@ -14,7 +14,7 @@ std::string nameofdotapp;
 
 int main(){
 
-    std::cout << " Przedłuenie GCC " << std::endl; // Information what is it ( my enlargement for GCC )
+    std::cout << " Przedłuenie G++ " << std::endl; // Information what is it ( my enlargement for GCC )
 
     system("clear");
 
@@ -24,7 +24,7 @@ int main(){
 
     system("clear");
 
-    std::cout << "Podaj ściekę do pliku ( /././ ) " << std::endl; // Request for path to file e.g main.cpp
+    std::cout << "Podaj ścieżkę do pliku ( /././ ) " << std::endl; // Request for path to file e.g main.cpp
 
     std::cin >> pathtofile;
 
