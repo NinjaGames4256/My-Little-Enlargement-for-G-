@@ -14,7 +14,7 @@ std::string nameofdotapp;
 
 int main(){
 
-    std::cout << " Przedłuenie G++ " << std::endl; // Information what is it ( my enlargement for GCC )
+    std::cout << " Przedłuenie G++ " << std::endl; // Information what is it ( my enlargement for G++ )
 
     system("clear");
 
