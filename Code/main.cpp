@@ -8,72 +8,64 @@
 
 #include <iostream>
 
-#include <cstdlib>
-#include <iostream>
-#include <curses.h>
-
 #include "BuildClass.hpp"
-
-std::string nameoffiletocompile;
-
-std::string pathtofile;
-
-std::string nameofdotapp;
-
-std::string type;
-
-std::string pathtoinclude; // This will by used soon
-
-std::string pathtolibs; // This too
 
 BuildClass BC;
 
+std::string WhatToDo;
+
 int main(){
-
-    std::cout << " Przedłużenie G++ " << std::endl; // Information what is it ( my enlargement for G++ )
-
-    system("clear");
-
-    std::cout << "Wybierz szablon ( Choose template ) " << std::endl; // Request for name of file e.g main.cpp
-
-    std::cin >> type;
-
-    if(type == "Custom"){
+    
+    for(;;){
         
+        std::cout << "You want to CREATE or OPEN project?" << std::endl;
+    
+        while(WhatToDo.empty()){
+            std::getline( std::cin, WhatToDo );
+        }
+    
+        if( WhatToDo == "CREATE" ){
+            BC.NewProject();
+            WhatToDo.clear();
+        }
+        else if( WhatToDo == "OPEN" ){
+            BC.OpenProject();
+            WhatToDo.clear();
+        }
+        else if( WhatToDo == "END" ){
+            std::cout << "You right now shutdown thsi program" << std::endl;
+            return 0;
+        } else {
+            std::cout << " I don't recognise this command! " << std::endl;
+        }
+    
         system("clear");
-        std::cout << "Podaj ścieżkę dostępu do include " << std::endl; // Request for name of file e.g main.cpp
-        std::cin >> pathtoinclude;
+    
+        for(;;){
+        
+            std::cout << "Now you are in the project" << std::endl;
+        
+            while (WhatToDo.empty()) {
+            std::getline( std::cin, WhatToDo );
+            }
+        
+            if(WhatToDo == "BUILD"){
+                BC.BuildProject();
+                WhatToDo.clear();
+                system("clear");
+            }
+        
+            else if( WhatToDo == "CLOSE" ){
+                std::cout << "Close the project" << std::endl;
+                WhatToDo.clear();
+                system("clear");
+                break;
+            }
+        
+        }
         
     }
     
-    system("clear");
-
-    std::cout << "Podaj nazwę pliku .cpp ( without .cpp, minus, plus, floor, e.t.c ) " << std::endl; // Request for name of file e.g main.cpp
-
-    std::cin >> nameoffiletocompile;
-
-    system("clear");
-
-    std::cout << "Podaj ścieżkę do pliku ( /././ ) " << std::endl; // Request for path to file e.g main.cpp
-
-    std::cin >> pathtofile;
-
-    system("clear");
-
-    std::cout << "Nazwę aplikacji .app ( file.app ) " << std::endl; // Request for name of file.app with you want create
-
-    std::cin >> nameofdotapp;
-
-    system("clear");
-
-    std::string x = "cd ~/Desktop/ && mkdir TermIDE && cd TermIDE";
-    std::string z = "cd ~/Desktop/TermIDE/ && mkdir " + nameofdotapp + " && cd " + nameofdotapp;
-    
-    system(x.c_str());
-    system(z.c_str());
-    
-    BC.Build(nameoffiletocompile, pathtofile, nameofdotapp, type, pathtoinclude, pathtolibs);
-
     return 0;
 
 }

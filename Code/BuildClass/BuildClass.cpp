@@ -8,51 +8,101 @@
 
 #include "BuildClass.hpp"
 
-void BuildClass::Build( std::string nameoffiletocompile, std::string pathtofile, std::string nameofdotapp, std::string type, std::string pathtoinclude, std::string pathtolibs ){
+void BuildClass::NewProject(){
     
-    if(type == "SFML"){
-        std::string x = "cd ~/Desktop/TermIDE/" + nameofdotapp + " && g++ -c " + pathtofile + nameoffiletocompile + ".cpp -I/usr/local/include";
-        std::string y = "cd ~/Desktop/TermIDE/" + nameofdotapp + " && g++ " + nameoffiletocompile + ".o -o" + nameofdotapp + " -lsfml-graphics -lsfml-window -lsfml-system -lsfml-network -lsfml-audio";
-
-        system(x.c_str()); // Build filename.o
-        system(y.c_str()); // Create file .app with your name
-
-    }
-
-    if(type == "OpenCV"){
-        std::string x = "cd ~/Desktop/TermIDE/" + nameofdotapp + " && g++ -c " + pathtofile + nameoffiletocompile + ".cpp -I/usr/local/include";
-        std::string y = "cd ~/Desktop/TermIDE/" + nameofdotapp + " && g++ " + nameoffiletocompile + ".o -o" + nameofdotapp + " `pkg-config --cflags --libs opencv`";
-
-        system(x.c_str()); // Build filename.o
-        system(y.c_str()); // Create file .app with your name
-
-    }
-
-    if(type == "Default"){
-        std::string x = "cd ~/Desktop/TermIDE/" + nameofdotapp + " && g++ -c " + pathtofile + nameoffiletocompile + ".cpp -I/usr/local/include";
-        std::string y = "cd ~/Desktop/TermIDE/" + nameofdotapp + " && g++ " + nameoffiletocompile + ".o -o" + nameofdotapp;
-
-        system(x.c_str()); // Build filename.o
-        system(y.c_str()); // Create file .app with your name
-
+    std::cout << "Please, type project name" << std::endl;
+    
+    while (ProjectName.empty()) {
+        std::getline( std::cin, ProjectName );
     }
     
-    if(type == "Boost"){
-        std::string x = "cd ~/Desktop/TermIDE/" + nameofdotapp + " && g++ -c " + pathtofile + nameoffiletocompile + ".cpp -I/usr/local/include";
-        std::string y = "cd ~/Desktop/TermIDE/" + nameofdotapp + " && g++ " + nameoffiletocompile + ".o -o" + nameofdotapp + " -lboost_system -lboost_filesystem";
-
-        system(x.c_str()); // Build filename.o
-        system(y.c_str()); // Create file .app with your name
-
+    std::cout << "Please, choose type of your project" << std::endl;
+    
+    while(For.empty()){
+        std::getline( std::cin, For );
     }
     
-    if(type == "Custom"){
-        std::string x = "cd ~/Desktop/TermIDE/" + nameofdotapp + " && g++ -c " + pathtofile + nameoffiletocompile + ".cpp -I/usr/local/include";
-        std::string y = "cd ~/Desktop/TermIDE/" + nameofdotapp + " && g++ " + nameoffiletocompile + ".o -o" + nameofdotapp + " -lboost_system -lboost_filesystem";
+    std::string ComandLineOne = "cd ~/Desktop/TermIDE && mkdir " + ProjectName;
+    
+    system("cd ~/Desktop/ && mkdir TermIDE");
+    system(ComandLineOne.c_str());
+    
+    if(For == "Deafult"){
+        std::string ComandLineTwo = "cd ~/Desktop/TermIDE/" + ProjectName + " && touch main.cpp && echo '#include <iostream> \n \n using namespace std; \n \n int main(){ \n \n return 0; \n }' >> main.cpp ";
+        system(ComandLineTwo.c_str());
+    }
+    
+    else if(For == "SFML"){
+        std::string ComandLineTwo = "cd ~/Desktop/TermIDE/" + ProjectName + " && touch main.cpp && echo '#include <SFML/Graphics.hpp> \n #include <SFML/Network.hpp> \n #include <SFML/Audio.hpp> \n #include <iostream> \n \n using namespace std; \n \n int main(){ \n \n return 0; \n }' >> main.cpp ";
+        system(ComandLineTwo.c_str());
+    }
+    
+    else if(For == "OpenCV"){
+        std::string ComandLineTwo = "cd ~/Desktop/TermIDE/" + ProjectName + " && touch main.cpp && echo '#include <opencv2/opencv.hpp> \n #include <iostream> \n \n using namespace std; \n \n int main(){ \n \n return 0; \n }' >> main.cpp ";
+        system(ComandLineTwo.c_str());
+    }
+    
+    else if(For == "Boost"){
+        std::string ComandLineTwo = "cd ~/Desktop/TermIDE/" + ProjectName + " && touch main.cpp && echo '#include <boost/multiprecision/cpp_int.hpp> \n #include <iostream> \n \n using namespace std; \n \n int main(){ \n \n return 0; \n }' >> main.cpp ";
+        system(ComandLineTwo.c_str());
+    }
+    
+}
 
-        system(x.c_str()); // Build filename.o
-        system(y.c_str()); // Create file .app with your name
+void BuildClass::OpenProject(){
+    
+    for(;;){
+        while (ProjectName.empty()) {
+            std::getline( std::cin, ProjectName );
+        }
+    
+        std::string ComandLineOne = "cd ~/Desktop/TermIDE/" + ProjectName;
+    
+        if(ProjectName.empty() != true){
+            if(system(ComandLineOne.c_str()) != true){
+                std::cout << "I can't find this project, maybey this project not exist" << std::endl;
+            } break;
+        }
+    }
+    
+}
 
+void BuildClass::SaveProject(){
+    
+}
+
+void BuildClass::BuildProject(){
+    
+    if(For == "Deafult"){
+        std::string x = "cd ~/Desktop/TermIDE/" + ProjectName + " && g++ -c *.cpp -I/usr/local/include";
+        std::string y = "cd ~/Desktop/TermIDE/" + ProjectName + " && g++ *.o -o" + ProjectName;
+    
+        system(x.c_str());
+        system(y.c_str());
+    }
+    
+    else if(For == "SFML"){
+        std::string x = "cd ~/Desktop/TermIDE/" + ProjectName + " && g++ -c *.cpp -I/usr/local/include";
+        std::string y = "cd ~/Desktop/TermIDE/" + ProjectName + " && g++ *.o -o" + ProjectName + " -lsfml-graphics -lsfml-window -lsfml-system -lsfml-audio -lsfml-network";
+    
+        system(x.c_str());
+        system(y.c_str());
+    }
+    
+    else if(For == "OpenCV"){
+        std::string x = "cd ~/Desktop/TermIDE/" + ProjectName + " && g++ -c *.cpp -I/usr/local/include";
+        std::string y = "cd ~/Desktop/TermIDE/" + ProjectName + " && g++ *.o -o" + ProjectName + " `pkg-config --cflags --libs opencv`";
+    
+        system(x.c_str());
+        system(y.c_str());
+    }
+    
+    else if(For == "Boost"){
+        std::string x = "cd ~/Desktop/TermIDE/" + ProjectName + " && g++ -c *.cpp -I/usr/local/include";
+        std::string y = "cd ~/Desktop/TermIDE/" + ProjectName + " && g++ *.o -o" + ProjectName + " -lboost_system -lboost_date_time -lboost_thread";
+    
+        system(x.c_str());
+        system(y.c_str());
     }
     
 }

@@ -11,16 +11,25 @@
 
 #include <stdio.h>
 #include <iostream>
+#include <fstream>
 
 class BuildClass{
     
 public:
     
-    void Build( std::string nameoffiletocompile, std::string pathtofile, std::string nameofdotapp, std::string type, std::string pathtoinclude, std::string pathtolibs );
+    void NewProject();
+    
+    void OpenProject();
+    
+    void SaveProject();
+    
+    void BuildProject();
     
 private:
     
+    std::string ProjectName;
     
+    std::string For;
     
 };
 
