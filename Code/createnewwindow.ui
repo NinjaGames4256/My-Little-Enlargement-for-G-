@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>CreateNewWindow</class>
+ <widget class="QWidget" name="CreateNewWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>800</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <widget class="QComboBox" name="comboBox">
+   <property name="geometry">
+    <rect>
+     <x>430</x>
+     <y>275</y>
+     <width>136</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <item>
+    <property name="text">
+     <string>Zwyczajny</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string notr="true">SFML</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string notr="true">OpenCV</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string notr="true">Boost</string>
+    </property>
+   </item>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
